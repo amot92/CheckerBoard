@@ -42,6 +42,8 @@ public class CheckerBoard {
         anchorPane = new AnchorPane();
         gridPane = new GridPane();
         
+        build(boardWidth, boardHeight);
+        
     }
     
     public AnchorPane build(double boardWidth, double boardHeight){

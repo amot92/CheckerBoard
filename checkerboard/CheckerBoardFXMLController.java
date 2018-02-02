@@ -51,7 +51,7 @@ public class CheckerBoardFXMLController implements Initializable {
     public void start(Stage stage){
         this.stage = stage;
         
-        checkerBoard = new grid.CheckerBoard(numRows, numCols, stage.getWidth(), stage.getHeight() - menuBar.getHeight());
+        checkerBoard = new grid.CheckerBoard(numRows, numCols, stage.getWidth(), computeBoardHeight());
         vBox.getChildren().add(checkerBoard.getBoard());
         
         ChangeListener<Number> lambdaChangeListener = (ObservableValue<? extends Number> observable, Number oldValue, final Number newValue) -> {
@@ -61,16 +61,16 @@ public class CheckerBoardFXMLController implements Initializable {
         this.stage.widthProperty().addListener(lambdaChangeListener);
         this.stage.heightProperty().addListener(lambdaChangeListener);
         
-        
-        refresh();
-        
+    }
+    
+    private double computeBoardHeight(){
+        return stage.getScene().getHeight() - menuBar.getHeight();
     }
     
     private void switchBoard(){
         clear();
-        checkerBoard = new grid.CheckerBoard(numRows, numCols, stage.getWidth(), stage.getHeight() - menuBar.getHeight(), lightColor, darkColor);
+        checkerBoard = new grid.CheckerBoard(numRows, numCols, stage.getWidth(), computeBoardHeight(), lightColor, darkColor);
         vBox.getChildren().add(checkerBoard.getBoard());
-        refresh();
     }
     
     @FXML
@@ -121,8 +121,7 @@ public class CheckerBoardFXMLController implements Initializable {
     }
     
     private void refresh() {
-        clear();
-        checkerBoard.build(stage.getWidth(), stage.getHeight() - menuBar.getHeight());
+        checkerBoard.build(stage.getWidth(), computeBoardHeight());
     }
     
     
