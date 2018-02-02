@@ -42,11 +42,12 @@ public class CheckerBoard {
         anchorPane = new AnchorPane();
         gridPane = new GridPane();
         
-        build(boardWidth, boardHeight);
     }
     
     public AnchorPane build(double boardWidth, double boardHeight){
-        
+        clear();
+        this.boardHeight = boardHeight;
+        this.boardWidth = boardWidth;
         rectangleWidth = Math.ceil(boardWidth / (double)numCols);
         rectangleHeight = Math.ceil(boardHeight / (double)numRows);
         gridPane.setPrefWidth(boardWidth);
@@ -58,11 +59,11 @@ public class CheckerBoard {
         for (int row = 0; row < numRows; row++){
             for (int col = 0; col < numCols; col++){
                 if(row%2 == 0 && col%2 == 0){
-                    color = Color.RED;
+                    color = lightColor;
                 }else if (row%2 != 0 && col%2 != 0){
-                    color = Color.RED;
+                    color = lightColor;
                 }else{
-                    color = Color.BLACK;
+                    color = darkColor;
                 }
                 
                 Rectangle rect = new Rectangle(rectangleWidth, rectangleHeight, color);

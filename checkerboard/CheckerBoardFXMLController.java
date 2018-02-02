@@ -7,6 +7,8 @@ package checkerboard;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,7 +26,7 @@ import javafx.stage.Stage;
  */
 public class CheckerBoardFXMLController implements Initializable {
 
-    private Scene scene;
+    private Stage stage;
     private int numRows;
     private int numCols;
     private Color lightColor;
@@ -40,13 +42,25 @@ public class CheckerBoardFXMLController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        numRows = 8;
+        numCols = 8;
     }
 
-    public void start(Scene scene){
-        this.scene = scene;
-        checkerBoard = new grid.CheckerBoard(8, 8, scene.getWidth(), scene.getHeight() - menuBar.getHeight());
+    public void start(Stage stage){
+        this.stage = stage;
+        
+        checkerBoard = new grid.CheckerBoard(numRows, numCols, stage.getWidth(), stage.getHeight() - menuBar.getHeight());
         vBox.getChildren().add(checkerBoard.getBoard());
+        
+        ChangeListener<Number> lambdaChangeListener = (ObservableValue<? extends Number> observable, Number oldValue, final Number newValue) -> {
+            refresh();
+        };
+        
+        this.stage.widthProperty().addListener(lambdaChangeListener);
+        this.stage.heightProperty().addListener(lambdaChangeListener);
+        
+        
+        refresh();
         
     }
     
@@ -58,12 +72,33 @@ public class CheckerBoardFXMLController implements Initializable {
     }
     
     @FXML
-    private void handleColorChange(ActionEvent event){
-        MenuItem menuItem = (MenuItem) event.getSource();
+    private void switchToRed(ActionEvent event){
+        clear(); //why is this necessary??
+        checkerBoard = new grid.CheckerBoard(numRows, numCols, stage.getWidth(), stage.getHeight() - menuBar.getHeight());
+        vBox.getChildren().add(checkerBoard.getBoard());
+        refresh();
+    }
+    
+    @FXML
+    private void switchToBlue(ActionEvent event){
+        clear();//why is this necessary??
+        checkerBoard = new grid.CheckerBoard(numRows, numCols, stage.getWidth(), stage.getHeight() - menuBar.getHeight(), Color.SKYBLUE, Color.DARKBLUE);
+        vBox.getChildren().add(checkerBoard.getBoard());
+        refresh();
+    }
+    
+    @FXML
+    private void clear(ActionEvent event){
+        checkerBoard.clear();
+    }
+    
+     private void clear(){
+        checkerBoard.clear();
     }
     
     private void refresh() {
-        checkerBoard.build(scene.getWidth(), scene.getHeight() - menuBar.getHeight());
+        clear();
+        checkerBoard.build(stage.getWidth(), stage.getHeight() - menuBar.getHeight());
     }
     
     
