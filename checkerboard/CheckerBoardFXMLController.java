@@ -44,6 +44,8 @@ public class CheckerBoardFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         numRows = 8;
         numCols = 8;
+        lightColor = Color.RED;
+        darkColor = Color.BLACK;
     }
 
     public void start(Stage stage){
@@ -64,32 +66,54 @@ public class CheckerBoardFXMLController implements Initializable {
         
     }
     
+    private void switchBoard(){
+        clear();
+        checkerBoard = new grid.CheckerBoard(numRows, numCols, stage.getWidth(), stage.getHeight() - menuBar.getHeight(), lightColor, darkColor);
+        vBox.getChildren().add(checkerBoard.getBoard());
+        refresh();
+    }
+    
     @FXML
-    private void handleSizeChange(ActionEvent event){
-        MenuItem menuItem = (MenuItem) event.getSource();
-        System.out.println(menuItem.getText());
-        
+    private void switchToLargeBoard(ActionEvent event){
+        numRows = 16;
+        numCols = 16;
+        switchBoard();
+    }
+    
+    @FXML
+    private void switchToMediumBoard(ActionEvent event){
+        numRows = 10;
+        numCols = 10;
+        switchBoard();
+    }
+    
+    @FXML
+    private void switchToSmallBoard(ActionEvent event){
+        numRows = 8;
+        numCols = 8;
+        switchBoard();
+    }
+    
+    @FXML
+    private void switchToTinyBoard(ActionEvent event){
+        numRows = 3;
+        numCols = 3;
+        switchBoard();
     }
     
     @FXML
     private void switchToRed(ActionEvent event){
-        clear(); //why is this necessary??
-        checkerBoard = new grid.CheckerBoard(numRows, numCols, stage.getWidth(), stage.getHeight() - menuBar.getHeight());
-        vBox.getChildren().add(checkerBoard.getBoard());
-        refresh();
+        lightColor = Color.RED;
+        darkColor = Color.BLACK;
+        switchBoard();
     }
+    
     
     @FXML
     private void switchToBlue(ActionEvent event){
-        clear();//why is this necessary??
-        checkerBoard = new grid.CheckerBoard(numRows, numCols, stage.getWidth(), stage.getHeight() - menuBar.getHeight(), Color.SKYBLUE, Color.DARKBLUE);
-        vBox.getChildren().add(checkerBoard.getBoard());
-        refresh();
-    }
-    
-    @FXML
-    private void clear(ActionEvent event){
-        checkerBoard.clear();
+        lightColor = Color.SKYBLUE;
+        darkColor = Color.DARKBLUE;
+        switchBoard();
     }
     
      private void clear(){
