@@ -7,6 +7,7 @@ package checkerboard;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -19,12 +20,14 @@ public class CheckerBoard extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("CheckerBoardFXML.fxml"));
-        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CheckerBoardFXML.fxml"));
+        Parent root = loader.load();
+        CheckerBoardFXMLController controller = loader.getController();        
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
         stage.show();
+        controller.start(stage);
     }
 
     /**
