@@ -6,7 +6,9 @@
 package grid;
 
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 /**
  *
@@ -23,8 +25,7 @@ public class CheckerBoard {
     private double rectangleHeight;
     
     private AnchorPane anchorPane;
-    
-    private Color[] colors = {Color.BLACK, Color.RED, Color.DARKBLUE, Color.SKYBLUE};
+    private GridPane gridPane;
     
     public CheckerBoard(int numRows, int numCols, double boardWidth, double boardHeight){
         this(numRows, numCols, boardWidth, boardHeight, Color.RED, Color.BLACK);
@@ -37,14 +38,40 @@ public class CheckerBoard {
         this.boardHeight = boardHeight;
         this.lightColor = lightColor;
         this.darkColor = darkColor;
+        
+        anchorPane = new AnchorPane();
+        gridPane = new GridPane();
+        
+        build(boardWidth, boardHeight);
     }
     
     public AnchorPane build(double width, double height){
         
+        rectangleWidth = Math.ceil(width / (double)numCols);
+        rectangleHeight = Math.ceil(height / (double)numRows);
+        Color color;
+        int i = 0;
+        
+        for (int row = 0; row < numRows; row++){
+            for (int col = 0; col < numCols; col++){
+                if(row%2 == 0 && col%2 == 0){
+                    color = Color.RED;
+                }else if (row%2 != 0 && col%2 != 0){
+                    color = Color.RED;
+                }else{
+                    color = Color.BLACK;
+                }
+                
+                Rectangle rect = new Rectangle(rectangleWidth, rectangleHeight, color);
+                gridPane.add(rect, row, col);
+                
+            }
+        }
+        anchorPane.getChildren().add(gridPane);
         return anchorPane;
     }
     
-      public void clear() {
+     public void clear() {
         anchorPane.getChildren().clear();
     }
     
@@ -82,14 +109,6 @@ public class CheckerBoard {
     
     public Color getLightColor() {
         return lightColor;
-    }
-
-    private CheckerBoard(int numRows, int numCols, double boardWidth, double boardHeight, Color RED, Color BLACK) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private CheckerBoard(int numRows, int numCols, double boardWidth, double boardHeight, Color RED, Color BLACK) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
