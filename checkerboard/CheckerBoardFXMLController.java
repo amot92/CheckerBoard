@@ -7,7 +7,12 @@ package checkerboard;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuItem;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -16,12 +21,31 @@ import javafx.fxml.Initializable;
  */
 public class CheckerBoardFXMLController implements Initializable {
 
+    private int numRows;
+    private int numCols;
+    private Color lightColor;
+    private Color darkColor;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+
+    public void start(Stage stage){
+    }
+    
+    @FXML
+    private void handleSizeChange(ActionEvent event){
+        MenuItem menuItem = (MenuItem) event.getSource();
+        System.out.println(menuItem.getText());
+    }
+    
+    @FXML
+    private void handleColorChange(ActionEvent event){
+        
+    }
     
 }
