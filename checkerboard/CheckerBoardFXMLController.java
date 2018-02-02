@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -22,7 +24,7 @@ import javafx.stage.Stage;
  */
 public class CheckerBoardFXMLController implements Initializable {
 
-    private Stage stage;
+    private Scene scene;
     private int numRows;
     private int numCols;
     private Color lightColor;
@@ -33,14 +35,17 @@ public class CheckerBoardFXMLController implements Initializable {
     @FXML
     private VBox vBox;
     
+    @FXML
+    private MenuBar menuBar;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
-    public void start(Stage stage){
-        this.stage = stage;
-        checkerBoard = new grid.CheckerBoard(8, 8, stage.getWidth(), stage.getHeight());
+    public void start(Scene scene){
+        this.scene = scene;
+        checkerBoard = new grid.CheckerBoard(8, 8, scene.getWidth(), scene.getHeight() - menuBar.getHeight());
         vBox.getChildren().add(checkerBoard.getBoard());
         
     }
@@ -55,6 +60,10 @@ public class CheckerBoardFXMLController implements Initializable {
     @FXML
     private void handleColorChange(ActionEvent event){
         MenuItem menuItem = (MenuItem) event.getSource();
+    }
+    
+    private void refresh() {
+        checkerBoard.build(scene.getWidth(), scene.getHeight() - menuBar.getHeight());
     }
     
     

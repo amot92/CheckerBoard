@@ -45,10 +45,13 @@ public class CheckerBoard {
         build(boardWidth, boardHeight);
     }
     
-    public AnchorPane build(double width, double height){
+    public AnchorPane build(double boardWidth, double boardHeight){
         
-        rectangleWidth = Math.ceil(width / (double)numCols);
-        rectangleHeight = Math.ceil(height / (double)numRows);
+        rectangleWidth = Math.ceil(boardWidth / (double)numCols);
+        rectangleHeight = Math.ceil(boardHeight / (double)numRows);
+        gridPane.setPrefWidth(boardWidth);
+        gridPane.setPrefHeight(boardHeight);
+        
         Color color;
         int i = 0;
         

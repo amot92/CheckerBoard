@@ -27,7 +27,7 @@ public class CheckerBoard extends Application {
         
         stage.setScene(scene);
         stage.show();
-        controller.start(stage);
+        controller.start(scene);
     }
 
     /**
