@@ -54,6 +54,8 @@ public class CheckerBoard {
         rectangleHeight = Math.ceil(boardHeight / (double)numRows);
         gridPane.setPrefWidth(boardWidth);
         gridPane.setPrefHeight(boardHeight);
+        anchorPane.setPrefWidth(boardWidth);
+        anchorPane.setPrefHeight(boardHeight);
         
         Color color;
         int i = 0;

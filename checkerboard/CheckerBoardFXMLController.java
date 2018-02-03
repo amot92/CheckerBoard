@@ -61,6 +61,7 @@ public class CheckerBoardFXMLController implements Initializable {
         
     }
     
+    
     private void switchBoard(){
         if(checkerBoard != null){
             clear();
@@ -70,7 +71,7 @@ public class CheckerBoardFXMLController implements Initializable {
     }
     
     private double computeBoardHeight(){
-        return stage.getScene().getHeight() - menuBar.getHeight();
+        return stage.getHeight() - menuBar.getHeight();
     }
     
     @FXML
