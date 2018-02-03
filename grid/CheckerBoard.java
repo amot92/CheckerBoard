@@ -74,11 +74,13 @@ public class CheckerBoard {
             }
         }
         anchorPane.getChildren().add(gridPane);
+        System.out.println(rectangleWidth);
         return anchorPane;
     }
     
      public void clear() {
         anchorPane.getChildren().clear();
+        gridPane.getChildren().clear();
     }
     
     public AnchorPane getBoard() {
