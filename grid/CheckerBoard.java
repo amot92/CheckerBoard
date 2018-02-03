@@ -52,14 +52,10 @@ public class CheckerBoard {
         this.boardWidth = boardWidth;
         rectangleWidth = Math.ceil(boardWidth / (double)numCols);
         rectangleHeight = Math.ceil(boardHeight / (double)numRows);
-        gridPane.setPrefWidth(boardWidth);
-        gridPane.setPrefHeight(boardHeight);
         anchorPane.setPrefWidth(boardWidth);
         anchorPane.setPrefHeight(boardHeight);
         
         Color color;
-        int i = 0;
-        
         for (int row = 0; row < numRows; row++){
             for (int col = 0; col < numCols; col++){
                 if(row%2 == col%2){
