@@ -7,6 +7,7 @@ package checkerboard;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -75,46 +76,29 @@ public class CheckerBoardFXMLController implements Initializable {
     }
     
     @FXML
-    private void switchToLargeBoard(ActionEvent event){
-        numRows = 16;
-        numCols = 16;
+    private void handleSizeChange(ActionEvent event){
+        MenuItem menuItem = (MenuItem) event.getSource();
+         
+        StringTokenizer st = new StringTokenizer(menuItem.getText().toString());
+        int result = Integer.parseInt(st.nextToken());
+         
+        numRows = result;
+        numCols = result;
         switchBoard();
     }
-    
+            
     @FXML
-    private void switchToMediumBoard(ActionEvent event){
-        numRows = 10;
-        numCols = 10;
-        switchBoard();
-    }
-    
-    @FXML
-    private void switchToSmallBoard(ActionEvent event){
-        numRows = 8;
-        numCols = 8;
-        switchBoard();
-    }
-    
-    @FXML
-    private void switchToTinyBoard(ActionEvent event){
-        numRows = 3;
-        numCols = 3;
-        switchBoard();
-    }
-    
-    @FXML
-    private void switchToRed(ActionEvent event){
-        lightColor = Color.RED;
-        darkColor = Color.BLACK;
-        switchBoard();
-    }
-    
-    
-    @FXML
-    private void switchToBlue(ActionEvent event){
-        lightColor = Color.SKYBLUE;
-        darkColor = Color.DARKBLUE;
-        switchBoard();
+    private void handleColorChange(ActionEvent event){
+        MenuItem menuItem = (MenuItem) event.getSource();
+        if(menuItem.getText().toString().equals("Default")){
+           lightColor = Color.RED;
+            darkColor = Color.BLACK;
+            switchBoard();
+        }else{
+            lightColor = Color.SKYBLUE;
+            darkColor = Color.DARKBLUE;
+            switchBoard();
+        }
     }
     
      private void clear(){
