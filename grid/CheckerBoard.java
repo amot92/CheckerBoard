@@ -62,9 +62,7 @@ public class CheckerBoard {
         
         for (int row = 0; row < numRows; row++){
             for (int col = 0; col < numCols; col++){
-                if(row%2 == 0 && col%2 == 0){
-                    color = lightColor;
-                }else if (row%2 != 0 && col%2 != 0){
+                if(row%2 == col%2){
                     color = lightColor;
                 }else{
                     color = darkColor;
@@ -84,7 +82,11 @@ public class CheckerBoard {
     }
     
     public AnchorPane getBoard() {
-        return anchorPane;
+        if(anchorPane != null){
+            return anchorPane;
+        }else{
+            return null;
+        }
     }
     
     public int getNumRows() {

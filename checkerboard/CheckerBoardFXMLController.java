@@ -75,7 +75,7 @@ public class CheckerBoardFXMLController implements Initializable {
     }
     
     private double computeBoardHeight(){
-        return stage.getHeight() - menuBar.getHeight();
+        return vBox.getHeight() - menuBar.getHeight();
     }
     
     @FXML
