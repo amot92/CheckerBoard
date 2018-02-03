@@ -51,10 +51,10 @@ public class CheckerBoardFXMLController implements Initializable {
 
     public void start(Stage stage){
         this.stage = stage;
-        switchBoard();
+        createBoard();
         
         ChangeListener<Number> lambdaChangeListener = (ObservableValue<? extends Number> observable, Number oldValue, final Number newValue) -> {
-            refresh();
+            refreshBoard();
         };
         
         this.stage.widthProperty().addListener(lambdaChangeListener);
@@ -62,13 +62,16 @@ public class CheckerBoardFXMLController implements Initializable {
         
     }
     
-    
-    private void switchBoard(){
+    private void createBoard(){
         if(checkerBoard != null){
-            clear();
+            checkerBoard.clear();
         }
         checkerBoard = new grid.CheckerBoard(numRows, numCols, stage.getWidth(), computeBoardHeight(), lightColor, darkColor);
         vBox.getChildren().add(checkerBoard.getBoard());
+    }
+    
+    private void refreshBoard() {
+        checkerBoard.build(stage.getWidth(), computeBoardHeight());
     }
     
     private double computeBoardHeight(){
@@ -84,7 +87,7 @@ public class CheckerBoardFXMLController implements Initializable {
          
         numRows = result;
         numCols = result;
-        switchBoard();
+        createBoard();
     }
             
     @FXML
@@ -92,22 +95,16 @@ public class CheckerBoardFXMLController implements Initializable {
         MenuItem menuItem = (MenuItem) event.getSource();
         if(menuItem.getText().toString().equals("Default")){
            lightColor = Color.RED;
-            darkColor = Color.BLACK;
-            switchBoard();
+           darkColor = Color.BLACK;
         }else{
             lightColor = Color.SKYBLUE;
             darkColor = Color.DARKBLUE;
-            switchBoard();
         }
+        createBoard();
+
     }
     
-     private void clear(){
-        checkerBoard.clear();
-    }
     
-    private void refresh() {
-        checkerBoard.build(stage.getWidth(), computeBoardHeight());
-    }
     
     
 }
