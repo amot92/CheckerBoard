@@ -50,9 +50,7 @@ public class CheckerBoardFXMLController implements Initializable {
 
     public void start(Stage stage){
         this.stage = stage;
-        
-        checkerBoard = new grid.CheckerBoard(numRows, numCols, stage.getWidth(), computeBoardHeight());
-        vBox.getChildren().add(checkerBoard.getBoard());
+        switchBoard();
         
         ChangeListener<Number> lambdaChangeListener = (ObservableValue<? extends Number> observable, Number oldValue, final Number newValue) -> {
             refresh();
@@ -63,14 +61,16 @@ public class CheckerBoardFXMLController implements Initializable {
         
     }
     
-    private double computeBoardHeight(){
-        return stage.getScene().getHeight() - menuBar.getHeight();
-    }
-    
     private void switchBoard(){
-        clear();
+        if(checkerBoard != null){
+            clear();
+        }
         checkerBoard = new grid.CheckerBoard(numRows, numCols, stage.getWidth(), computeBoardHeight(), lightColor, darkColor);
         vBox.getChildren().add(checkerBoard.getBoard());
+    }
+    
+    private double computeBoardHeight(){
+        return stage.getScene().getHeight() - menuBar.getHeight();
     }
     
     @FXML
