@@ -24,7 +24,7 @@ import javafx.stage.Stage;
  * FXML Controller class
  *
  * @author adammoakes
- */
+ */ — testing iOS —
 public class CheckerBoardFXMLController implements Initializable {
 
     private Stage stage;
